@@ -28,7 +28,8 @@ export default class Dom {
     input.checked = completed;
     p.classList.add('description');
     p.innerHTML = description;
-    div.innerHTML = 'delete';
+    div.innerHTML = 'remove';
+    div.classList.add('remove');
 
     section.append(input, p);
     li.append(section, div);

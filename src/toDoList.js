@@ -27,4 +27,9 @@ export default class ToDoList {
     this.tasks.forEach((task, i) => task.id = i+1);
   }
 
+  remove(id) {
+    console.log(this.tasks.splice(id, 1));
+    this.tasks.splice(id,1);
+  }
+
 }
