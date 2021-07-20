@@ -4,14 +4,14 @@ export default class Dom {
   constructor(){
     this.toDoList = new ToDoList();
     this.listWrapper = document.querySelector('.to-do-list');
+    this.addInput = document.querySelector('.new-task');
   }
 
   init = (storage) => {
     if( !storage.isEmpty() ) {
       this.toDoList.update(storage.get());
     }
-    else 
-      this.render();
+    this.render();
   }
 
   createNewTask(description,completed,id) {
@@ -21,8 +21,9 @@ export default class Dom {
     const p = document.createElement('p');
     const div = document.createElement('div');
 
-    li.classList.add('task');
-    li.id = id;
+    li.classList.add('task','flex');
+    section.classList.add('flex');
+    li.dataset.id = id;
     input.type = 'checkbox';
     input.checked = completed;
     p.classList.add('description');
@@ -35,9 +36,11 @@ export default class Dom {
   }
 
   render() {
-    this.toDoList.get().forEach(elem => this.listWrapper.append(
+    this.listWrapper.innerHTML = ''; // clear the Task. Should find better solution
+    console.log(typeof this.toDoList.get());
+    this.toDoList.get().forEach((elem,i) => this.listWrapper.append(
       this.createNewTask(
-        elem.description, elem.completed, elem.id)
+        elem.description, elem.completed,i)
         ));
   }
 }

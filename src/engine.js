@@ -12,6 +12,6 @@ export default class Engine {
   init() {
     this.dom.init(this.storage);
 
-    //this.events.set(this.dom, this.storage);
+    this.events.addTask(this.dom, this.storage);
   }
 }
