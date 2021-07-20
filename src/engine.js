@@ -10,7 +10,7 @@ export default class Engine {
     this.events = new Events();
   }
   init() {
-    // this.dom.init(this.storage);
+    this.dom.init(this.storage);
 
     //this.events.set(this.dom, this.storage);
   }
