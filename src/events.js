@@ -56,7 +56,9 @@ export default class Events {
   }
 
   check(e,dom,storage) {
-    dom.change(e.target.dataset.id);
+    // the id is 1 base, but the array is 0
+    // therefore id-1
+    dom.change(e.target.dataset.id-1);
     storage.set(dom.toDoList.get());
   }
 

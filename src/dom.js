@@ -30,7 +30,8 @@ export default class Dom {
     // ================//
     input.type = 'checkbox';
     input.checked = completed;
-    input.dataset.id = id;
+    // the id should be 1 base
+    input.dataset.id = id+1;
     input.classList.add('completed');
     // ================//
     p.classList.add('description');
