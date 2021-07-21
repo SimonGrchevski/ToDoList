@@ -4,16 +4,21 @@ import Dom from './dom.js';
 export default class Events {
 
   allEvents = [];
+  dragTask;
   refreshScreenAndSetEvents(dom,storage) {
     storage.set(dom.toDoList.get());
     dom.render();
+    this.setAllEvents(dom, storage);
   }
 
   initEvents() {
     this.allEvents.push(
       { target: 'remove', event: 'click', func: this.remove },
       { target: 'completed', event: 'change', func: this.check },
-      { target: '', event: 'keypress', func: this.add });
+      { target: '', event: 'keypress', func: this.add },
+      { target: 'task', event: 'dragstart', func: this.drag },
+      { target: 'task', event: 'dragover', func: this.dragover },
+      { target: 'task', event: 'drop', func: this.dropTask });
   }
 
   setEvent(target,event,func,dom,storage)
@@ -41,16 +46,14 @@ export default class Events {
     if(target.value.length)
     {
       dom.toDoList.pushTask(target.value, false, 0).orderTask();
-      this.refreshScreenAndSetEvents(dom, storage);
       target.value = '';
-      this.setAllEvents(dom,storage);
+      this.refreshScreenAndSetEvents(dom, storage);
     }
   }
 
   remove(e,dom,storage) {
     dom.toDoList.remove(e.target.parentNode.dataset.id).orderTask();
     this.refreshScreenAndSetEvents(dom, storage);
-    this.setAllEvents(dom, storage);
   }
 
   check(e,dom,storage) {
@@ -58,18 +61,26 @@ export default class Events {
     storage.set(dom.toDoList.get());
   }
 
-  setAllEvents(dom,storage) {
-    this.allEvents.forEach(e => { this.setEvent(e.target,e.event,e.func,dom,storage)});
+  drag(e,dom,storage) {
+    e.stopPropagation();
+    this.dragTask = e.target;
   }
 
+  dragover(e,dom,storage)
+  {
+    e.preventDefault();
+  }
 
-  dragEvent(dom,storage) {
-    [...document.querySelectorAll('.task')].forEach(task  => {
-      task.addEventListener('drag', function(e){
-        console.log(e);
-        console.log("dragged");
-      })
-    });
+  dropTask(e,dom,storage) {
+    if (e.target.classList.contains('task') )
+    {
+      dom.toDoList.swap(this.dragTask, e.target.dataset.id).orderTask();
+      this.refreshScreenAndSetEvents(dom, storage);
+    }
 
+  }
+
+  setAllEvents(dom,storage) {
+    this.allEvents.forEach(e => { this.setEvent(e.target,e.event,e.func,dom,storage)});
   }
 }

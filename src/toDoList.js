@@ -21,9 +21,11 @@ export default class ToDoList {
     return this;
   }
 
-  fill() {
-    this.tasks.push(new Task('task1', false,0));
-    this.tasks.push(new Task('task2',false,1));
+  swap(drag,target) {
+    const swap = JSON.parse( JSON.stringify(this.tasks[drag.dataset.id]));
+    this.tasks = this.tasks.filter(task => task != this.tasks[drag.dataset.id] );
+    this.tasks.splice(target, 0, swap);
+    return this;
   }
 
   orderTask() {
@@ -31,7 +33,7 @@ export default class ToDoList {
   }
 
   remove(id) {
-    this.tasks.splice(id,1,);
+    this.tasks.splice(id,1);
     return this;
   }
 

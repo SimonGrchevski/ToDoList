@@ -16,6 +16,5 @@ export default class Engine {
     // this.events.removeEvent(this.dom, this.storage);
     // this.events.checkEvent(this.dom, this.storage);
     this.events.setAllEvents(this.dom,this.storage);
-    this.events.dragEvent(this.dom,this.storage);
   }
 }
