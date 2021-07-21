@@ -13,6 +13,10 @@ export default class ToDoList {
     return this.tasks;
   }
 
+  getAt(index) {
+    return this.tasks[index];
+  }
+
   pushTask(desc,completed,id) {
     this.tasks.push(new Task(desc,completed, id));
     return this;
@@ -28,8 +32,8 @@ export default class ToDoList {
   }
 
   remove(id) {
-    console.log(this.tasks.splice(id, 1));
-    this.tasks.splice(id,1);
+    this.tasks.splice(id,1,);
+    return this;
   }
 
 }

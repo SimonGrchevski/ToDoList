@@ -26,6 +26,7 @@ export default class Dom {
     li.dataset.id = id;
     input.type = 'checkbox';
     input.checked = completed;
+    input.classList.add('completed');
     p.classList.add('description');
     p.innerHTML = description;
     div.innerHTML = 'remove';
@@ -37,8 +38,7 @@ export default class Dom {
   }
 
   render() {
-    this.listWrapper.innerHTML = ''; // clear the Task. Should find better solution
-    console.log(typeof this.toDoList.get());
+    this.listWrapper.innerHTML = ''; // clear the Tasks. Should find better solution
     this.toDoList.get().forEach((elem,i) => this.listWrapper.append(
       this.createNewTask(
         elem.description, elem.completed,i)

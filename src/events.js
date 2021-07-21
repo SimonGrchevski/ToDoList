@@ -3,39 +3,50 @@ import Dom from './dom.js';
 
 export default class Events {
 
-  setAllEvents(dom,storage) {
-    this.removeEvent(dom, storage);
-  }
-
-  refresh(dom, storage) {
+  refreshScreenAndSetEvents(dom,storage) {
     storage.set(dom.toDoList.get());
     dom.render();
+    this.removeEvent(dom, storage);
+    this.checkEvent(dom, storage);
   }
 
   add(target, dom, storage) {
     dom.toDoList.pushTask(target.value, false, 0).orderTask();
-    this.refresh(dom, storage);
+    this.refreshScreenAndSetEvents(dom, storage);
   }
 
   remove(e,dom,storage) {
-    dom.toDoList.remove(e.dataset.id);
-    this.refresh(dom, storage);
-    this.setAllEvents(dom, storage);
-    console.log("inside remove");
+    dom.toDoList.remove(e.dataset.id).orderTask();
+    this.refreshScreenAndSetEvents(dom, storage);
+  }
+
+  check(e,dom,storage) {
+    console.log(dom.toDoList.getAt(e.target.parentNode.dataset.id));
   }
 
   addEvent(dom,storage) {
+    const self = this;
     dom.addInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') this.add(e.target,dom,storage);
+      if (e.key === 'Enter') self.add(e.target,dom,storage);
     });
     
   }
 
   removeEvent(dom,storage) {
+    const self=this;
     [...document.querySelectorAll('.remove')].forEach(rem  => {
       rem.addEventListener('click',function(e){
-        this.remove(e.target, dom, storage);
+        self.remove(e.target.parentNode, dom, storage);
       })
     });
+  }
+
+  checkEvent(dom,storage){
+    const self = this;
+    [...document.querySelectorAll('.completed')].forEach(box => {
+      box.addEventListener('change',function(e){
+        self.check(e,dom,storage);
+      })
+    })
   }
 }
