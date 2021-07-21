@@ -13,8 +13,8 @@ export default class ToDoList {
     return this.tasks;
   }
 
-  getAt(index) {
-    return this.tasks[index];
+  toggleComplete(index) {
+    this.tasks[index].completed = !this.tasks[index].completed;
   }
 
   pushTask(desc,completed,id) {

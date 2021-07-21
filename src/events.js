@@ -21,7 +21,8 @@ export default class Events {
   }
 
   check(e,dom,storage) {
-    console.log(dom.toDoList.getAt(e.target.parentNode.dataset.id));
+    dom.change(e.dataset.id);
+    storage.set(dom.toDoList.get());
   }
 
   addEvent(dom,storage) {
@@ -45,7 +46,7 @@ export default class Events {
     const self = this;
     [...document.querySelectorAll('.completed')].forEach(box => {
       box.addEventListener('change',function(e){
-        self.check(e,dom,storage);
+        self.check(e.target,dom,storage);
       })
     })
   }

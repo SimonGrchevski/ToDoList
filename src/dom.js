@@ -26,6 +26,7 @@ export default class Dom {
     li.dataset.id = id;
     input.type = 'checkbox';
     input.checked = completed;
+    input.dataset.id = id;
     input.classList.add('completed');
     p.classList.add('description');
     p.innerHTML = description;
@@ -43,5 +44,9 @@ export default class Dom {
       this.createNewTask(
         elem.description, elem.completed,i)
         ));
+  }
+
+  change(id) {
+    this.toDoList.toggleComplete(id);
   }
 }
