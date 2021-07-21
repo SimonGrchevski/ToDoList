@@ -84,7 +84,8 @@ export default class Events {
 
   editTask(e,dom,storage) {
 
-    const taskId = e.target.previousSibling.dataset.id - 1;// because id's are 1 based
+    // because id's are recist.
+    const taskId = e.target.previousSibling.dataset.id - 1;
     dom.toDoList.editTask(taskId,e.target.innerHTML);
     storage.set(dom.toDoList.get());
   }
