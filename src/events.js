@@ -2,11 +2,7 @@ export default class Events {
 
   allEvents = [];
   dragTask;
-  refreshScreenAndSetEvents(dom,storage) {
-    storage.set(dom.toDoList.get());
-    dom.render();
-    this.setAllEvents(dom, storage);
-  }
+
 
   initEvents() {
     this.allEvents.push(
@@ -19,6 +15,7 @@ export default class Events {
       { target: 'removeCompleted', event: 'click', func: this.removeCompleted },
       { target: 'description', event: 'keyup', func: this.editTask });
   }
+
 
   setEvent(target,event,func,dom,storage)
   {
@@ -94,5 +91,11 @@ export default class Events {
 
   setAllEvents(dom,storage) {
     this.allEvents.forEach(e => { this.setEvent(e.target,e.event,e.func,dom,storage)});
+  }
+
+  refreshScreenAndSetEvents(dom, storage) {
+    storage.set(dom.toDoList.get());
+    dom.render();
+    this.setAllEvents(dom, storage);
   }
 }
