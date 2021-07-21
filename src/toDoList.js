@@ -33,7 +33,7 @@ export default class ToDoList {
   }
 
   orderTask() {
-    this.tasks.forEach((task, i) => task.id = i+1);
+    this.tasks.forEach((task, i) => task.id = i+1); // remember ID's?
   }
 
   removeCheckedTask() {
