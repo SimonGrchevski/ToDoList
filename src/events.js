@@ -3,11 +3,17 @@ import Dom from './dom.js';
 
 export default class Events {
 
+  allEvents = [];
   refreshScreenAndSetEvents(dom,storage) {
     storage.set(dom.toDoList.get());
     dom.render();
-    this.removeEvent(dom, storage);
-    this.checkEvent(dom, storage);
+  }
+
+  initEvents() {
+    this.allEvents.push(
+      { target: 'remove', event: 'click', func: this.remove },
+      { target: 'completed', event: 'change', func: this.check },
+      { target: '', event: 'keypress', func: this.add });
   }
 
   setEvent(target,event,func,dom,storage)
@@ -29,21 +35,22 @@ export default class Events {
       });
       break;
     }
-    // [...document.querySelectorAll("."+target)].forEach(rem => {
-    //   rem.addEventListener(event, function (e) {
-    //     func.apply(self,[e, dom, storage]);
-    //   })
-    // });
   }
 
   add(target, dom, storage) {
-    dom.toDoList.pushTask(target.value, false, 0).orderTask();
-    this.refreshScreenAndSetEvents(dom, storage);
+    if(target.value.length)
+    {
+      dom.toDoList.pushTask(target.value, false, 0).orderTask();
+      this.refreshScreenAndSetEvents(dom, storage);
+      target.value = '';
+      this.setAllEvents(dom,storage);
+    }
   }
 
   remove(e,dom,storage) {
     dom.toDoList.remove(e.target.parentNode.dataset.id).orderTask();
     this.refreshScreenAndSetEvents(dom, storage);
+    this.setAllEvents(dom, storage);
   }
 
   check(e,dom,storage) {
@@ -51,21 +58,18 @@ export default class Events {
     storage.set(dom.toDoList.get());
   }
 
-  addEvent(dom,storage) {
-    // const self = this;
-    // dom.addInput.addEventListener('keypress', function(e) {
-    //   if (e.key === 'Enter') self.add(e.target,dom,storage);
-    // });
-    this.setEvent('','keypress',this.add,dom,storage);
-    
+  setAllEvents(dom,storage) {
+    this.allEvents.forEach(e => { this.setEvent(e.target,e.event,e.func,dom,storage)});
   }
 
-  removeEvent(dom,storage) {
-    this.setEvent('remove', 'click', this.remove,dom,storage);
 
-  }
+  dragEvent(dom,storage) {
+    [...document.querySelectorAll('.task')].forEach(task  => {
+      task.addEventListener('drag', function(e){
+        console.log(e);
+        console.log("dragged");
+      })
+    });
 
-  checkEvent(dom,storage) {
-    this.setEvent('completed', 'change', this.check, dom, storage);
   }
 }

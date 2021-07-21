@@ -22,6 +22,7 @@ export default class Dom {
     const div = document.createElement('div');
 
     li.classList.add('task','flex');
+    li.draggable = true;
     section.classList.add('flex');
     li.dataset.id = id;
     input.type = 'checkbox';
