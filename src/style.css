@@ -13,3 +13,10 @@ ul {
   justify-content: space-between;
   align-items: center;
 }
+
+.removeCompleted {
+  text-align: center;
+}
+a {
+    cursor: pointer;
+}

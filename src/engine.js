@@ -12,9 +12,6 @@ export default class Engine {
   init() {
     this.dom.init(this.storage);
     this.events.initEvents();
-    // this.events.addEvent(this.dom, this.storage);
-    // this.events.removeEvent(this.dom, this.storage);
-    // this.events.checkEvent(this.dom, this.storage);
     this.events.setAllEvents(this.dom,this.storage);
   }
 }

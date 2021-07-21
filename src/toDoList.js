@@ -37,4 +37,8 @@ export default class ToDoList {
     return this;
   }
 
+  removeCheckedTask() {
+    this.tasks= this.tasks.filter(task => !task.completed );
+    return this;
+  }
 }

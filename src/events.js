@@ -1,6 +1,3 @@
-import Storage from './localStorage.js';
-import Dom from './dom.js';
-
 export default class Events {
 
   allEvents = [];
@@ -18,7 +15,8 @@ export default class Events {
       { target: '', event: 'keypress', func: this.add },
       { target: 'task', event: 'dragstart', func: this.drag },
       { target: 'task', event: 'dragover', func: this.dragover },
-      { target: 'task', event: 'drop', func: this.dropTask });
+      { target: 'task', event: 'drop', func: this.dropTask },
+      { target: 'removeCompleted', event: 'click', func: this.removeCompleted });
   }
 
   setEvent(target,event,func,dom,storage)
@@ -62,12 +60,18 @@ export default class Events {
   }
 
   drag(e,dom,storage) {
+    // great escape
+    dom;
+    storage;
     e.stopPropagation();
     this.dragTask = e.target;
   }
 
   dragover(e,dom,storage)
   {
+    // another one :D
+    dom;
+    storage;
     e.preventDefault();
   }
 
@@ -77,7 +81,11 @@ export default class Events {
       dom.toDoList.swap(this.dragTask, e.target.dataset.id).orderTask();
       this.refreshScreenAndSetEvents(dom, storage);
     }
+  }
 
+  removeCompleted(e,dom, storage) {
+    dom.toDoList.removeCheckedTask().orderTask();
+    this.refreshScreenAndSetEvents(dom, storage);
   }
 
   setAllEvents(dom,storage) {
