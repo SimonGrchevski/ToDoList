@@ -35,9 +35,11 @@ export default class Dom {
     // ================//
     p.classList.add('description');
     p.innerHTML = description;
+    p.contentEditable=true;
+
     // ================//
     div.innerHTML = 'remove';
-    div.classList.add('remove');
+    div.classList.add('remove','material-icons');
     // ================//
     section.append(input, p);
     li.append(section, div);

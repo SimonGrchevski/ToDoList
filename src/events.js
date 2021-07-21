@@ -16,7 +16,8 @@ export default class Events {
       { target: 'task', event: 'dragstart', func: this.drag },
       { target: 'task', event: 'dragover', func: this.dragover },
       { target: 'task', event: 'drop', func: this.dropTask },
-      { target: 'removeCompleted', event: 'click', func: this.removeCompleted });
+      { target: 'removeCompleted', event: 'click', func: this.removeCompleted },
+      { target: 'description', event: 'keyup', func: this.editTask });
   }
 
   setEvent(target,event,func,dom,storage)
@@ -31,7 +32,7 @@ export default class Events {
       break;
       
       default: 
-      [...document.querySelectorAll("." + target)].forEach(rem => {
+      [...document.querySelectorAll(`.${target}`)].forEach(rem => {
         rem.addEventListener(event, function (e) {
           func.apply(self, [e, dom, storage]);
         })
@@ -86,6 +87,10 @@ export default class Events {
   removeCompleted(e,dom, storage) {
     dom.toDoList.removeCheckedTask().orderTask();
     this.refreshScreenAndSetEvents(dom, storage);
+  }
+
+  editTask(e,dom,storage) {
+    dom.toDoList.editTask(e.target.previousSibling.dataset.id,e.target.innerHTML);
   }
 
   setAllEvents(dom,storage) {

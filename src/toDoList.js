@@ -41,4 +41,9 @@ export default class ToDoList {
     this.tasks= this.tasks.filter(task => !task.completed );
     return this;
   }
+
+  editTask(task,description) {
+    console.log(task);
+    this.tasks[task].description = description;
+  }
 }
