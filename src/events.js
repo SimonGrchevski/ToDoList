@@ -25,7 +25,7 @@ export default class Events {
     {
       case 'keypress':
         dom.addInput.addEventListener(event, function (e) {
-          if (e.key === 'Enter') func.apply(self, [e.target, dom,]);
+          if (e.key === 'Enter') func.apply(self, [e.target,dom]);
         });
       break;
       
@@ -84,7 +84,6 @@ export default class Events {
   }
 
   editTask(e,dom) {
-
     // because id's are recist.
     const taskId = e.target.previousSibling.dataset.id - 1;
     dom.toDoList.editTask(taskId,e.target.innerHTML);

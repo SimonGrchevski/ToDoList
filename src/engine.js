@@ -6,7 +6,6 @@ export default class Engine {
 
   constructor(){
     this.dom = new Dom();
-    this.storage = new Storage();
     this.events = new Events();
   }
   init() {
