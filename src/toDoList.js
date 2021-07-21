@@ -2,7 +2,6 @@ import Task from './task.js';
 export default class ToDoList {
   constructor() {
     this.tasks = [];
-    this.fill();
   }
 
   update(localStorage) {
