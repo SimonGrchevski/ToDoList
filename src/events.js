@@ -63,18 +63,12 @@ export default class Events {
   }
 
   drag(e,dom,storage) {
-    // great escape
-    dom;
-    storage;
     e.stopPropagation();
     this.dragTask = e.target;
   }
 
   dragover(e,dom,storage)
   {
-    // another one :D
-    dom;
-    storage;
     e.preventDefault();
   }
 
