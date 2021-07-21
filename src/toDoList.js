@@ -21,10 +21,14 @@ export default class ToDoList {
     return this;
   }
 
+  remove(id) {
+    this.tasks.splice(id, 1);
+    return this;
+  }
+
   swap(drag,target) {
     const swap = JSON.parse( JSON.stringify(this.tasks[drag.dataset.id]));
-    this.tasks = this.tasks.filter(task => task != this.tasks[drag.dataset.id] );
-    this.tasks.splice(target, 0, swap);
+    this.remove(drag.dataset.id).tasks.splice(target, 0, swap);
     return this;
   }
 
@@ -32,13 +36,8 @@ export default class ToDoList {
     this.tasks.forEach((task, i) => task.id = i+1);
   }
 
-  remove(id) {
-    this.tasks.splice(id,1);
-    return this;
-  }
-
   removeCheckedTask() {
-    this.tasks= this.tasks.filter(task => !task.completed );
+    this.tasks = this.tasks.filter(task => !task.completed );
     return this;
   }
 
