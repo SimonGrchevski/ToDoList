@@ -1,4 +1,5 @@
 import ToDoList from './toDoList.js';
+import Storage from './localStorage.js';
 export default class Dom {
 
   constructor(){
@@ -7,9 +8,9 @@ export default class Dom {
     this.addInput = document.querySelector('.new-task');
   }
 
-  init = (storage) => {
-    if( !storage.isEmpty() ) {
-      this.toDoList.update(storage.get());
+  init = () => {
+    if( !Storage.isEmpty() ) {
+      this.toDoList.update(Storage.get());
     }
     this.render();
   }

@@ -1,14 +1,14 @@
 export default class Storage {
 
-  set(storage) {
+  static set(storage) {
     localStorage.setItem('toDoList',JSON.stringify(storage));
   }
   
-  get() {
+  static get() {
     return JSON.parse(localStorage.getItem('toDoList'));
   }
 
-  isEmpty() {
+  static isEmpty() {
     return this.get() === null;
   }
 }
