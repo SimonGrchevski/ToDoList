@@ -43,7 +43,6 @@ export default class ToDoList {
   }
 
   editTask(task,description) {
-    console.log(task);
     this.tasks[task].description = description;
   }
 }
