@@ -1,6 +1,5 @@
 import Events from './events.js';
 import Dom from './dom.js';
-import Storage from './localStorage.js';
 
 export default class Engine {
 
