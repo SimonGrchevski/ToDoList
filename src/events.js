@@ -1,12 +1,11 @@
 import Storage from './localStorage.js';
 export default class Events {
 
-  allEvents = [];
   dragTask;
 
-
-  initEvents() {
-    this.allEvents.push(
+  constructor()
+  {
+    this.allEvents = [
       { target: 'remove', event: 'click', func: this.remove },
       { target: 'completed', event: 'change', func: this.check },
       { target: '', event: 'keypress', func: this.add },
@@ -14,9 +13,9 @@ export default class Events {
       { target: 'task', event: 'dragover', func: this.dragover },
       { target: 'task', event: 'drop', func: this.dropTask },
       { target: 'removeCompleted', event: 'click', func: this.removeCompleted },
-      { target: 'description', event: 'keyup', func: this.editTask });
+      { target: 'description', event: 'keyup', func: this.editTask }
+    ]
   }
-
 
   setEvent(target,event,func,dom)
   {
