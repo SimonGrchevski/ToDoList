@@ -42,14 +42,15 @@ export default class Events {
   add(target, dom) {
     if(target.value.length)
     {
-      dom.toDoList.pushTask(target.value, false, 0).orderTask();
+      dom.addTask(target.value,false,0);
       target.value = '';
       this.refreshScreenAndSetEvents(dom);
     }
   }
 
   remove(e,dom) {
-    dom.toDoList.remove(e.target.parentNode.dataset.id).orderTask();
+    const id = e.target.parentNode.dataset.id;
+    dom.removeTask(id);
     this.refreshScreenAndSetEvents(dom);
   }
 
@@ -73,20 +74,20 @@ export default class Events {
   dropTask(e,dom) {
     if (e.target.classList.contains('task') )
     {
-      dom.toDoList.swap(this.dragTask, e.target.dataset.id).orderTask();
+      dom.swapTask(this.dragTask, e.target.dataset.id);
       this.refreshScreenAndSetEvents(dom);
     }
   }
 
   removeCompleted(e,dom) {
-    dom.toDoList.removeCheckedTask().orderTask();
+    dom.removeChecked();
     this.refreshScreenAndSetEvents(dom);
   }
 
   editTask(e,dom) {
     // because id's are recist.
     const taskId = e.target.previousSibling.dataset.id - 1;
-    dom.toDoList.editTask(taskId,e.target.innerHTML);
+    dom.edit(taskId, e.target.innerHTML);
     Storage.set(dom.toDoList.get());
   }
 

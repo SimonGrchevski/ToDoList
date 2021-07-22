@@ -59,4 +59,24 @@ export default class Dom {
   change(id) {
     this.toDoList.toggleComplete(id);
   }
+
+  addTask(description,completed,id) {
+    this.toDoList.pushTask(description,completed,id).orderTask();
+  }
+
+  removeTask(id) {
+     this.toDoList.remove(id).orderTask();
+  }
+
+  swapTask(dragTarg,dropTarg) {
+    this.toDoList.swap(dragTarg, dropTarg).orderTask();
+  }
+
+  removeChecked() {
+    this.toDoList.removeCheckedTask().orderTask();
+  }
+
+  edit(id,description) {
+    this.toDoList.editTask(id,description);
+  }
 }
