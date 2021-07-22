@@ -39,6 +39,16 @@ export default class Events {
     }
   }
 
+  refreshScreenAndSetEvents(dom) {
+    Storage.set(dom.getTasks());
+    dom.render();
+    this.setAllEvents(dom);
+  }
+
+  setAllEvents(dom) {
+    this.allEvents.forEach(e => { this.setEvent(e.target, e.event, e.func, dom) });
+  }
+
   add(target, dom) {
     if(target.value.length)
     {
@@ -89,15 +99,5 @@ export default class Events {
     const taskId = e.target.previousSibling.dataset.id - 1;
     dom.edit(taskId, e.target.innerHTML);
     Storage.set(dom.getTasks());
-  }
-
-  setAllEvents(dom) {
-    this.allEvents.forEach(e => { this.setEvent(e.target,e.event,e.func,dom)});
-  }
-
-  refreshScreenAndSetEvents(dom) {
-    Storage.set(dom.getTasks());
-    dom.render();
-    this.setAllEvents(dom);
   }
 }
