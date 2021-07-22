@@ -58,7 +58,7 @@ export default class Events {
     // the id is 1 base, but the array is 0
     // therefore id-1
     dom.change(e.target.dataset.id-1);
-    Storage.set(dom.toDoList.get());
+    Storage.set(dom.getTasks());
   }
 
   drag(e,dom) {
@@ -88,7 +88,7 @@ export default class Events {
     // because id's are recist.
     const taskId = e.target.previousSibling.dataset.id - 1;
     dom.edit(taskId, e.target.innerHTML);
-    Storage.set(dom.toDoList.get());
+    Storage.set(dom.getTasks());
   }
 
   setAllEvents(dom) {
@@ -96,7 +96,7 @@ export default class Events {
   }
 
   refreshScreenAndSetEvents(dom) {
-    Storage.set(dom.toDoList.get());
+    Storage.set(dom.getTasks());
     dom.render();
     this.setAllEvents(dom);
   }

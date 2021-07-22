@@ -15,6 +15,10 @@ export default class Dom {
     this.render();
   }
 
+  getTasks() {
+    return this.toDoList.get();
+  }
+
   createNewTask(description,completed,id) {
     const li = document.createElement('li');
     const section = document.createElement('section');
