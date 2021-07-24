@@ -43,7 +43,7 @@ export default class Dom {
     return element;
   }
 
-  getAllTaskElements(des,completed,id) {
+  createAllTaskElements(des,completed,id) {
     return [
     this.createElement('li',{'class':'task flex'},{'draggable':true },id),
     this.createElement('section',{'class': 'flex'}, {},id),
@@ -56,7 +56,7 @@ export default class Dom {
   }
 
   createNewTask(description,completed,id) {
-  const [li, sec, input, p, div] = this.getAllTaskElements(description, completed, id+1);
+  const [li, sec, input, p, div] = this.createAllTaskElements(description,completed,id+1);
   sec.append(input, p);
   li.append(sec, div);
   return li;
@@ -79,7 +79,7 @@ export default class Dom {
   }
 
   removeTask(id) {
-     this.toDoList.remove(id-1).orderTask();
+    this.toDoList.remove(id-1).orderTask();
   }
 
   swapTask(dragTarg,dropTarg) {
