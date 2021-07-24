@@ -19,7 +19,7 @@ export default class Dom {
     return this.toDoList.get();
   }
 
-  createElements(tag, attr, prop,id = '')
+  createElement(tag, attr, prop,id = '')
   {
     const element = document.createElement(tag);
     element.dataset.id = id;
@@ -35,11 +35,11 @@ export default class Dom {
   }
   createNewTask(description,completed,id) {
 
-  const li =  this.createElements('li',{'class':'task flex'},{'draggable': true },id + 1);
-  const sec = this.createElements('section',{'class':'flex'}, {}, id + 1);
-  const input = this.createElements('input',{'class':'completed'},{'type':'checkbox','checked':completed},id + 1);
-  const p = this.createElements('p',{'class':'description'},{'contentEditable':true, 'innerHTML':description},id + 1);
-  const div = this.createElements('div',{'class':'remove material-icons'},{'innerHTML': 'remove'},id+1);
+  const li =  this.createElement('li',{'class':'task flex'},{'draggable': true },id + 1);
+  const sec = this.createElement('section',{'class':'flex'}, {}, id + 1);
+  const input = this.createElement('input',{'class':'completed'},{'type':'checkbox','checked':completed},id + 1);
+  const p = this.createElement('p',{'class':'description'},{'contentEditable':true, 'innerHTML':description},id + 1);
+  const div = this.createElement('div',{'class':'remove material-icons'},{'innerHTML': 'remove'},id+1);
 
   sec.append(input, p);
   li.append(sec, div);
@@ -63,7 +63,7 @@ export default class Dom {
   }
 
   removeTask(id) {
-     this.toDoList.remove(id).orderTask();
+     this.toDoList.remove(id-1).orderTask();
   }
 
   swapTask(dragTarg,dropTarg) {
