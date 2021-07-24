@@ -34,7 +34,7 @@ export default class Dom {
   }
 
 
-  createElement(tag, attr, prop,id = '')
+  createElement(tag, attr, prop,id)
   {
     const element = document.createElement(tag);
     element.dataset.id = id;
