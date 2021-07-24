@@ -19,20 +19,29 @@ export default class Dom {
     return this.toDoList.get();
   }
 
+  setAttr(elem,attr)
+  {
+    for (const a in attr) {
+      elem.setAttribute(a, attr[a]);
+    }
+  }
+
+  setProp(elem,prop)
+  {
+    for (const p in prop) {
+      elem[p] = prop[p];
+    }
+  }
+
   createElement(tag, attr, prop,id = '')
   {
     const element = document.createElement(tag);
     element.dataset.id = id;
-    for(const a in attr) {
-      element.setAttribute(a,attr[a]);
-    }
-
-    for (const p in prop) {
-      element[p] = prop[p];
-    }
-
+    this.setAttr(element,attr);
+    this.setProp(element,prop);
     return element;
   }
+  
   createNewTask(description,completed,id) {
 
   const li =  this.createElement('li',{'class':'task flex'},{'draggable': true },id + 1);
