@@ -19,37 +19,31 @@ export default class Dom {
     return this.toDoList.get();
   }
 
-  createNewTask(description,completed,id) {
-    const li = document.createElement('li');
-    const section = document.createElement('section');
-    const input = document.createElement('input');
-    const p = document.createElement('p');
-    const div = document.createElement('div');
-    
-    // ================//
-    li.classList.add('task','flex');
-    li.draggable = true;
-    li.dataset.id = id;
-    // ================//
-    section.classList.add('flex');
-    // ================//
-    input.type = 'checkbox';
-    input.checked = completed;
-    // the id should be 1 base
-    input.dataset.id = id+1;
-    input.classList.add('completed');
-    // ================//
-    p.classList.add('description');
-    p.innerHTML = description;
-    p.contentEditable=true;
+  createElements(tag, attr, prop,id = '')
+  {
+    const element = document.createElement(tag);
+    element.dataset.id = id;
+    for(const a in attr) {
+      element.setAttribute(a,attr[a]);
+    }
 
-    // ================//
-    div.innerHTML = 'remove';
-    div.classList.add('remove','material-icons');
-    // ================//
-    section.append(input, p);
-    li.append(section, div);
-    return li;
+    for (const p in prop) {
+      element[p] = prop[p];
+    }
+
+    return element;
+  }
+  createNewTask(description,completed,id) {
+
+  const li =  this.createElements('li',{'class':'task flex'},{'draggable': true },id + 1);
+  const sec = this.createElements('section',{'class':'flex'}, {}, id + 1);
+  const input = this.createElements('input',{'class':'completed'},{'type':'checkbox','checked':completed},id + 1);
+  const p = this.createElements('p',{'class':'description'},{'contentEditable':true, 'innerHTML':description},id + 1);
+  const div = this.createElements('div',{'class':'remove material-icons'},{'innerHTML': 'remove'},id+1);
+
+  sec.append(input, p);
+  li.append(sec, div);
+  return li;
   }
 
   render() {

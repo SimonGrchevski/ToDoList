@@ -27,8 +27,9 @@ export default class ToDoList {
   }
 
   swap(drag,target) {
-    const swap = JSON.parse( JSON.stringify(this.tasks[drag.dataset.id]));
-    this.remove(drag.dataset.id).tasks.splice(target, 0, swap);
+    // I mean, ID'S man
+    const swap = JSON.parse( JSON.stringify(this.tasks[drag.dataset.id-1]));
+    this.remove(drag.dataset.id-1).tasks.splice(target-1, 0, swap);
     return this;
   }
 
