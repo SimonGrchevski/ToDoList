@@ -6,14 +6,14 @@ export default class Events {
   constructor()
   {
     this.allEvents = [
-      { target: 'remove', event: 'click', func: this.remove },
-      { target: 'completed', event: 'change', func: this.check },
-      { target: '', event: 'keypress', func: this.add },
-      { target: 'task', event: 'dragstart', func: this.drag },
-      { target: 'task', event: 'dragover', func: this.dragover },
-      { target: 'task', event: 'drop', func: this.dropTask },
-      { target: 'removeCompleted', event: 'click', func: this.removeCompleted },
-      { target: 'description', event: 'keyup', func: this.editTask }
+      { target: 'remove',          event: 'click',     func: this.remove          },
+      { target: 'completed',       event: 'change',    func: this.check           },
+      { target: '',                event: 'keypress',  func: this.add             },
+      { target: 'task',            event: 'dragstart', func: this.drag            },
+      { target: 'task',            event: 'dragover',  func: this.dragover        },
+      { target: 'task',            event: 'drop',      func: this.dropTask        },
+      { target: 'removeCompleted', event: 'click',     func: this.removeCompleted },
+      { target: 'description',     event: 'keyup',     func: this.editTask        }
     ]
   }
 
