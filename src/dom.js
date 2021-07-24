@@ -33,6 +33,7 @@ export default class Dom {
     }
   }
 
+
   createElement(tag, attr, prop,id = '')
   {
     const element = document.createElement(tag);
@@ -41,15 +42,21 @@ export default class Dom {
     this.setProp(element,prop);
     return element;
   }
-  
+
+  getAllTaskElements(des,completed,id) {
+    return [
+    this.createElement('li',{'class':'task flex'},{'draggable':true },id),
+    this.createElement('section',{'class': 'flex'}, {},id),
+    this.createElement(
+    'input',{'class':'completed'},{'type':'checkbox','checked':completed},id),
+    this.createElement(
+    'p',{'class':'description'},{'contentEditable':true,'innerHTML':des},id ),
+    this.createElement('div',{'class':'remove material-icons'},{'innerHTML':'remove'},id)
+    ];
+  }
+
   createNewTask(description,completed,id) {
-
-  const li =  this.createElement('li',{'class':'task flex'},{'draggable': true },id + 1);
-  const sec = this.createElement('section',{'class':'flex'}, {}, id + 1);
-  const input = this.createElement('input',{'class':'completed'},{'type':'checkbox','checked':completed},id + 1);
-  const p = this.createElement('p',{'class':'description'},{'contentEditable':true, 'innerHTML':description},id + 1);
-  const div = this.createElement('div',{'class':'remove material-icons'},{'innerHTML': 'remove'},id+1);
-
+  const [li, sec, input, p, div] = this.getAllTaskElements(description, completed, id+1);
   sec.append(input, p);
   li.append(sec, div);
   return li;
