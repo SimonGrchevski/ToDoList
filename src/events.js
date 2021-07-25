@@ -58,7 +58,7 @@ export default class Events {
   }
 
   remove(e,dom) {
-    const id = e.target.parentNode.dataset.id;
+    const id = e.target.dataset.id;
     dom.removeTask(id);
     this.refreshScreenAndSetEvents(dom);
   }
@@ -95,7 +95,7 @@ export default class Events {
 
   editTask(e,dom) {
     // because id's are recist.
-    const taskId = e.target.previousSibling.dataset.id - 1;
+    const taskId = e.target.dataset.id - 1;
     dom.edit(taskId, e.target.innerHTML);
     Storage.set(dom.getTasks());
   }
