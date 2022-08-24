@@ -1,6 +1,6 @@
 # toToList
 
-> This project is simple minimalist to-do-list.
+> This project is simple minimalistic to-do-list.
 ### Features:
 
   - Add new Task
